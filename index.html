@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>오늘의 꽃말</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+<style type="text/css">
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('grass.png'); /* 풀 사진 배경 */
+  background-size: cover;
+}
+
+p {font-family:'Kirang Haerang'}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boxes {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 60vh; /* 이미지와 상자 크기를 60vh로 맞춤 */
+  margin: 0 10px;
+  border: 0.5pt solid black; /* 0.5pt 검은색 테두리 */
+  background-color: transparent;
+}
+
+.flower-image {
+  padding: 20px ;max-width: 90%;
+  max-height: 90%;
+  object-fit: contain; /* 이미지를 상자에 맞추면서 비율 유지 */
+}
+
+#colorButton {font-family: 'Kirang Haerang';
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.meaning-display {
+  position: absolute;
+  top: 20px;
+ left: 20px;
+  font-size: 40px;
+  color: black;
+}
+
+
+</style>
+
+</head>
+<body>
+	  <div class="meaning-display">
+    <p id="flowerMeaning">오늘의 꽃말</p>
+  </div>
+  
+ <div class="container">
+    <!-- 3개의 가로 정렬된 상자 -->
+    <div class="boxes">
+      <div class="box" id="box1">
+        <img src="flower1.png" alt="꽃 1" class="flower-image">
+      </div>
+      <div class="box" id="box2">
+        <img src="flower2.png" alt="꽃 2" class="flower-image">
+      </div>
+      <div class="box" id="box3">
+        <img src="flower3.png" alt="꽃 3" class="flower-image">
+      </div>
+    </div>
+    
+    <button id="colorButton">색상 변경</button>
+  </div>
+
+
+<script type="text/javascript">
+const flowerMeaning = document.getElementById('flowerMeaning');
+const colorButton = document.getElementById('colorButton');
+const boxes = [document.getElementById('box1'), document.getElementById('box2'), document.getElementById('box3')];
+
+//색상과 꽃말 데이터 10개
+const flowers = [
+  { color: 'red', meaning: '사랑' },
+  { color: 'yellow', meaning: '우정' },
+  { color: 'white', meaning: '순수' },
+  { color: 'blue', meaning: '신뢰' },
+  { color: 'pink', meaning: '감사' },
+  { color: 'orange', meaning: '열정' },
+  { color: 'purple', meaning: '우아함' },
+  { color: 'green', meaning: '희망' },
+  { color: 'black', meaning: '미스터리' },
+  { color: 'gold', meaning: '성공' }
+];
+
+let currentIndex = 0;
+
+colorButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % flowers.length; // 배열이 10개로 확장됨
+  const currentFlower = flowers[currentIndex];
+  
+  // 박스 색상 변경
+  boxes.forEach(box => {
+    box.style.backgroundColor = currentFlower.color;
+  });
+  
+  // 꽃말 변경
+  flowerMeaning.textContent =`오늘의 꽃말 < ${currentFlower.meaning} >`;
+});
+
+</script>
+
+</body>
+</html>
